@@ -154,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           GestureDetector(
                                             onTap:(){
                                               setState(() {
-                                                Provider.of<CartProvider>(context,listen: false).addToCart(data[index]);
+
                                                 if (data[index].isClick ==
                                                     null) {
                                                   data[index].isClick= true;
@@ -162,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   data[index].isClick =
                                                   !data[index].isClick;
                                                 }
-
+                                                Provider.of<CartProvider>(context,listen: false).addToCart(data[index]);
                                               });
                                             },
                                             child: Container(
@@ -221,7 +221,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           height:20,
                                                           width:20 ,
                                                           child: Center(
-                                                            child: Text(quantity.toString(),style: TextStyle(
+                                                            child: Text(data[index].quantity.toString(),style: TextStyle(
                                                                 color: Colors.black,
                                                                 fontSize: 11,
                                                                 fontWeight: FontWeight.bold

@@ -23,23 +23,27 @@ class CartProvider extends ChangeNotifier {
   double get total {
     double total = 0;
     for (int i = 0; i < _cart.length; i++) {
-      total += (double.parse(_cart[i].sellingPrice.toString()) *
-          double.parse(_cart[i].quantity.toString()));
+      if(_cart[i].quantity==null){
+        _cart[i].quantity=1;
+      }else {
+        total += (double.parse(_cart[i].sellingPrice.toString()) *
+            double.parse(_cart[i].quantity.toString()));
+      }
     }
     return total;
   }
 
 
-  int quantity(String id) {
-    for (int i = 0; i < _cart.length; i++) {
-      if (_cart[i].sId == id) {
-        return _cart[i].quantity;
-      }
+
+  void addToCart(CartModel item) {
+    if(_cart.length==0){
+      _cart.add(item);
+      item.quantity=1;
+    }else{
+      _cart.add(item);
+      item.quantity=1;
     }
-    return 0;
-  }
-  void addToCart(CartModel CartModel) {
-    _cart.add(CartModel);
+
     notifyListeners();
 
   }

@@ -15,6 +15,7 @@ class CartModel{
     this.image,
     this.name,
     this.quantity,
+    this.sId,
     this.sellingPrice,
     this.mrp
 });

@@ -21,22 +21,28 @@ class _HomeScreenState extends State<HomeScreen> {
   List<CartModel> data=[];
   addData(){
     data.add(CartModel(
+      sId: "1",
         sellingPrice: 45,
         mrp: 50,
         name: "Yardlong Bean",
         image:"https://www.agrifarming.in/wp-content/uploads/2018/07/Yard-Long-Beans-Characterstics..jpg" ,
-        weight: "500 g"
+        weight: "500 g",
+      quantity: 0,
+
     ),);
     data.add(CartModel(
         sellingPrice: 40,
+        sId: "2",
         mrp: 45,
         name: "Beans",
         image: "https://4.imimg.com/data4/QF/EV/MY-1473185/beans-500x500.jpg",
         weight: "500 g",
-      quantity: 0,
+      quantity: 0
+
     ),);
     data.add(CartModel(
         sellingPrice: 30,
+        sId: "3",
         mrp: 40,
         name: "Cucumber",
         image:"https://images.unsplash.com/photo-1449300079323-02e209d9d3a6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y3VjdW1iZXJ8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80" ,
@@ -45,9 +51,10 @@ class _HomeScreenState extends State<HomeScreen> {
     ),);
     data.add(CartModel(
         sellingPrice: 25,
+        sId: "4",
         mrp: 28,
         name: "Onion",
-        image:"https://m.economictimes.com/thumb/msid-81512028,width-810,height-568,resizemode-4,imgsize-1035649/onions.jpg" ,
+        image:"https://m.media-amazon.com/images/I/81p4sgrCfzL._SX466_.jpg" ,
         weight: "1 kg",
       quantity: 0,
     ),);
@@ -106,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   width: 80,
                                   decoration: BoxDecoration(
 
-                                    color: Colors.yellow,
+                                    //color: Colors.yellow,
                                     borderRadius: BorderRadius.circular(20),
                                     image: DecorationImage(image: NetworkImage(data[index].image),
                                         fit: BoxFit.cover)
@@ -194,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       children: [
                                                         GestureDetector(
                                                           onTap:(){
-                                                            removeItem();
+                                                            Provider.of<CartProvider>(context,listen: false).reduceQuantity(data[index].sId);
                                                           },
                                                           child: Container(
                                                             height:20,
@@ -230,7 +237,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         ),
                                                         GestureDetector(
                                                           onTap:(){
-                                                            addQty();
+                                                            Provider.of<CartProvider>(context,listen: false).addQuantity(data[index].sId);
                                                           },
                                                           child: Container(
                                                             height:20,
@@ -274,7 +281,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     },),
                 ),
-                Center(
+               cartProvider.cartLength==0? Container():
+
+               Center(
                   child: Container(
                     padding: EdgeInsets.only(left: 20),
                     height: 40,
